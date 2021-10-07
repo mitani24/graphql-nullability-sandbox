@@ -1,0 +1,35 @@
+type Query {
+  users(first: Int, last: Int, after: String, before: String): UserConnection
+  user(id: ID!): User
+}
+
+type UserConnection {
+  edges: [UserEdge]
+  nodes: [User]
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type UserEdge {
+  cursor: String!
+  node: User
+}
+
+type User {
+  id: ID!
+  email: String
+  username: String
+  followers(
+    first: Int
+    last: Int
+    after: String
+    before: String
+  ): UserConnection
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
